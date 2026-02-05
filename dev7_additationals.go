@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/dev7dev/uri-to-json/pkgs/outbound"
-	"github.com/dev7dev/uri-to-json/pkgs/parser"
-	"github.com/dev7dev/uri-to-json/pkgs/utils"
+	"github.com/ngwayzinmoe/uri-to-json/pkgs/outbound"
+	"github.com/ngwayzinmoe/uri-to-json/pkgs/parser"
+	"github.com/ngwayzinmoe/uri-to-json/pkgs/utils"
 	v2serial "github.com/xtls/xray-core/infra/conf/serial"
 	"strings"
 )
