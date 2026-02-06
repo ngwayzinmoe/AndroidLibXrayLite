@@ -3,7 +3,7 @@ module github.com/2dust/AndroidLibXrayLite
 go 1.22.2
 
 require (
-	github.com/ngwayzinmoe/uri-to-json v0.1.6
+	github.com/ngwayzinmoe/uri-to-json v0.1.7
 	github.com/xtls/xray-core v1.8.13
 	golang.org/x/mobile v0.0.0-20240506190922-a1a533f289d3
 	golang.org/x/sys v0.20.0
