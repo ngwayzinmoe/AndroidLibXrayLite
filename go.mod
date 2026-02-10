@@ -3,7 +3,7 @@ module github.com/2dust/AndroidLibXrayLite
 go 1.25.7
 
 require (
-	https://github.com/komoe-monywa/vpnparse v0.0.15
+	github.com/komoe-monywa/vpnparse v0.0.15
 	github.com/xtls/xray-core v1.260123.1-0.20260206094241-12ee51e4bb1d
 	golang.org/x/mobile v0.0.0-20260204172633-1dceadbbeea3
 	golang.org/x/sys v0.40.0
