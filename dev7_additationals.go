@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/ngwayzinmoe/uri-to-json/pkgs/outbound"
-	"github.com/ngwayzinmoe/uri-to-json/pkgs/parser"
-	"github.com/ngwayzinmoe/uri-to-json/pkgs/utils"
+	"github.com/komoe-monywa/vpnparse/pkgs/outbound"
+	"github.com/komoe-monywa/vpnparse/pkgs/parser"
+	"github.com/komoe-monywa/vpnparse/pkgs/utils"
 	v2serial "github.com/xtls/xray-core/infra/conf/serial"
 	"strings"
 )
@@ -45,8 +45,6 @@ func IsXrayURI(config string) bool {
 		return true
 	case parser.SchemeSS:
 		return true
-	case parser.SchemeHysteria2: // [၁] Hysteria2 ကို ခွင့်ပြုလိုက်ပါ
-		return true
 	default:
 		return false
 	}
@@ -57,25 +55,16 @@ func GetXrayOutboundFromURI(rawURI string) string {
 	if scheme == "" {
 		return ""
 	}
-
-	// [၂] URI ကို အရင် clean/parse လုပ်မယ် (parser.go ထဲက ParseRawUri ကို ခေါ်သုံးတာ ပိုကောင်းပါတယ်)
-	// VMess အတွက်က သီးသန့် logic ရှိနေလို့ ထားခဲ့ပေမယ့် တခြားဟာတွေအတွက် parser.ParseRawUri သုံးနိုင်ပါတယ်
 	if scheme == parser.SchemeVmess {
 		baseVMESSUri := getVMESSUriAttrs(strings.Replace(rawURI, parser.SchemeVmess, "", 1))
 		rawURI = parser.SchemeVmess + baseVMESSUri
-	} else {
-		// SS, Vless, Hysteria2 တို့အတွက် Base64 နဲ့ character တွေကို ရှင်းလင်းပြီးသား link ရအောင်ယူမယ်
-		rawURI = parser.ParseRawUri(rawURI)
 	}
-
-	// [၃] Outbound Object ရယူခြင်း
 	ob := outbound.GetOutbound(outbound.XrayCore, rawURI)
 	if ob != nil {
 		ob.Parse(rawURI)
-		// JSON indent လုပ်ပြီး ပြန်ပေးမယ်
 		return getOutboundJSONIntended(ob.GetOutboundStr())
 	} else {
-		fmt.Printf("Scheme %s is not parsable uri or not supported by this library.\n", scheme)
+		fmt.Println("this is not parsable uri or not supported by this library.")
 	}
 	return ""
 }
